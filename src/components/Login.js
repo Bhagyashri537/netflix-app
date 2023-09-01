@@ -2,13 +2,24 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import background from "../utils/images/background.jpg";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+
 
 const Login = () => {
   const [signInForm, setSignInForm] = useState(true);
   const [errmsg, setErrmsg] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -34,6 +45,18 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              const { uid, email, displayName } = user;
+              dispatch(
+                addUser({ uid: uid, email: email, displayName: displayName })
+              );
+            
+            })
+            .catch((error) => {});
           console.log(user);
         })
         .catch((error) => {
@@ -45,21 +68,20 @@ const Login = () => {
     } else {
       //sign in logic
 
-     
       signInWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
         .then((userCredential) => {
-          
           const user = userCredential.user;
-          console.log(user)
+          console.log(user);
+          
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrmsg(errorCode + "-" + errorMessage)
+          setErrmsg(errorCode + "-" + errorMessage);
         });
     }
   };
