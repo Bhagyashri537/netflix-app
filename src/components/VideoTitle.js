@@ -4,7 +4,7 @@ import { PiWarningCircleBold } from "react-icons/pi";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="pt-72 px-24 p w-screen aspect-video bg-gradient-to-r from-black absolute">
+    <div className="pt-40 px-24 p w-screen aspect-video bg-gradient-to-r from-black absolute">
       <h1 className="text-5xl text-white font-bold">{title}</h1>
       <h2 className=" py-6 text-white w-2/4">{overview}</h2>
       <div className="flex ">
