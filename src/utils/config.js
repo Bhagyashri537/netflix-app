@@ -7,4 +7,6 @@ export const api_options = {
   };
   
 
-  export const img_cdn_url = "https://image.tmdb.org/t/p/w500"
+  export const img_cdn_url = "https://image.tmdb.org/t/p/w500";
+
+  export const supported_lang = [{identifier: "en", name: "English"}, {identifier: "hin", name: "Hindi"}, {identifier: "mar", name: "Marathi"}]
