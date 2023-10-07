@@ -59,7 +59,7 @@ const Header = () => {
       <img src={netflixlogo} alt="logo" className="w-44" />
       {user ? (
         <div className="py-2 flex">
-          {showgptSerch && <select className="p-2 text-white bg-gray-700 m-2" onChange={handleLangChange} >
+          {showgptSerch && <select className="p-2 text-white bg-gray-700 m-2 rounded-md" onChange={handleLangChange} >
             {supported_lang.map((language) => (
               <option key={language.identifier} value={language.identifier}>
                 {language.name}
@@ -67,7 +67,7 @@ const Header = () => {
             ))}
           </select>}
           <button
-            className="bg-purple-500 text-white rounded-lg p-2"
+            className="p-2 text-white bg-gray-700 m-2 rounded-md"
             onClick={handlegptSearch}
           >
             {" "}
@@ -75,7 +75,7 @@ const Header = () => {
           </button>
           <button
             onClick={handleSignOut}
-            className="p-2 bg-red-700 text-white rounded-full"
+            className="p-2 w-32 bg-red-700 text-white rounded-md"
           >
             Sign out
           </button>
